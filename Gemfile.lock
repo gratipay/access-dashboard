@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    builder (3.2.2)
+    camping (2.1.532)
+      mab (>= 0.0.3)
+      rack (>= 1.0)
+    mab (0.0.3)
+    markaby (0.8.0)
+      builder
+    rack (1.5.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  camping
+  markaby
