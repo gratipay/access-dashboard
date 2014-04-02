@@ -1,14 +1,25 @@
 require 'camping'
 require 'active_hash'
 
-Camping.goes :App
+Camping.goes :Dashboard
 
-module App:Models
+module Dashboard:Models
   class Service < ActiveYaml::Base
     include ActiveHash::Associations
     has_many :users
+    has_many :apps
 
     set_filename "services"
+  end
+
+  class App < ActiveHash::Base
+    include ActiveHash::Associations
+    belongs_to :service
+
+    self.data = [
+      {:service => "heroku", :name => "gittip"},
+      {:service => "heroku", :name => "gittip-dev"}
+    ]
   end
 
   class User < ActiveYaml::Base
@@ -19,7 +30,7 @@ module App:Models
   end
 end
 
-module App::Controllers
+module Dashboard::Controllers
   class Index
     def get
       @services = Service.all
@@ -28,7 +39,7 @@ module App::Controllers
   end
 end
 
-module App::Views
+module Dashboard::Views
   def layout
     html do
       head { title "Gittip Service Access Dashboard" }

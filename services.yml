@@ -21,7 +21,7 @@
   - clone1018
   - zwn
   - patcon
-  repos:
+  apps:
   - gittip/www.gittip.com
   - gittip/building.gittip.com
   - gittip/roobot
