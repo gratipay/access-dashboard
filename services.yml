@@ -1,0 +1,92 @@
+- name: Heroku
+  access:
+  - whit537
+  - bruceadams
+  - pjf
+  - clone1018
+  - zwn
+  - seanlinsley
+  - patcon
+  - kennethreitz
+  apps:
+  - gittip
+  - gittip-dev
+  - building-gittip-com
+  - roobot-test
+  - roobot-prod
+- name: GitHub
+  access:
+  - whit537
+  - bruceadams
+  - clone1018
+  - zwn
+  - patcon
+  repos:
+  - gittip/www.gittip.com
+  - gittip/building.gittip.com
+  - gittip/roobot
+- name: Ally
+  image:
+  link:
+  access:
+  - whit537
+- name: Balanced
+  image:
+  link:
+  access:
+  - whit537
+- name: Capital One
+  image:
+  link:
+  access:
+  - whit537
+- name: DigitalOcean
+  image:
+  link:
+  access:
+  - whit537
+- name: Freshdesk
+  image:
+  link:
+  access:
+  - whit537
+- name: Gittip.com
+  image:
+  link:
+  access:
+  - whit537
+- name: Gittip LLC
+  image:
+  link:
+  access:
+  - whit537
+- name: Google Analytics
+  image:
+  link:
+  access:
+  - whit537
+- name: New Alliance
+  image:
+  link:
+  access:
+  - whit537
+- name: PayPal
+  image:
+  link:
+  access:
+  - whit537
+- name: Sentry
+  image:
+  link:
+  access:
+  - whit537
+- name: Tumblr
+  image:
+  link:
+  access:
+  - whit537
+- name: Twitter
+  image:
+  link:
+  access:
+  - whit537

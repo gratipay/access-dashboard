@@ -1,23 +1,21 @@
 require 'camping'
-require 'yaml'
+require 'active_hash'
 
 Camping.goes :App
 
-def config
-  YAML.load_file("config.yml")
-end
-
 module App:Models
-  class Service
-    def self.all
-      config['services'].keys
-    end
+  class Service < ActiveYaml::Base
+    include ActiveHash::Associations
+    has_many :users
+
+    set_filename "services"
   end
 
-  class User
-    def self.all
-      config['users']
-    end
+  class User < ActiveYaml::Base
+    include ActiveHash::Associations
+    belongs_to :service
+
+    set_filename "users"
   end
 end
 
@@ -43,7 +41,8 @@ module App::Views
 
   def index
     @services.each do |service|
-      h2 service
+      h2 service.name
+      p service.access.sort.join ', '
     end
   end
 end
