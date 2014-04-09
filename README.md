@@ -5,6 +5,13 @@ access to what. (Currently just a stub.)
 
 ## Usage
 
+    export GITHUB_TOKEN=xxxxxxxxx
+    export HEROKU_API_KEY=xxxxxxxxx
     bundle install --path vendor/bundle
     bundle exec camping app.rb
     curl http://127.0.0.1:3301
+
+## Notes
+
+* Github personal access token must have the permissions `public_repo` &
+  `read:org`
