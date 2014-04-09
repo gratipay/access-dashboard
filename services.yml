@@ -1,30 +1,15 @@
 - name: Heroku
-  access:
-  - whit537
-  - bruceadams
-  - pjf
-  - clone1018
-  - zwn
-  - seanlinsley
-  - patcon
-  - kennethreitz
   apps:
-  - gittip
-  - gittip-dev
-  - building-gittip-com
-  - roobot-test
-  - roobot-prod
+  - name: gittip
+  - name: gittip-dev
+  - name: building-gittip-com
+  - name: roobot-test
+  - name: roobot-prod
 - name: GitHub
-  access:
-  - whit537
-  - bruceadams
-  - clone1018
-  - zwn
-  - patcon
   apps:
-  - gittip/www.gittip.com
-  - gittip/building.gittip.com
-  - gittip/roobot
+  - name: gittip/www.gittip.com
+  - name: gittip/building.gittip.com
+  - name: gittip/roobot
 - name: Ally
   image:
   link:

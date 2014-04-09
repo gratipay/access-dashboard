@@ -1,39 +1,38 @@
-require 'camping'
 require 'active_hash'
+require 'excon'
+require 'camping'
+require 'heroku-api'
 
 Camping.goes :Dashboard
 
-module Dashboard:Models
+module Dashboard::Models
   class Service < ActiveYaml::Base
-    include ActiveHash::Associations
-    has_many :users
-    has_many :apps
-
     set_filename "services"
   end
 
-  class App < ActiveHash::Base
-    include ActiveHash::Associations
-    belongs_to :service
-
-    self.data = [
-      {:service => "heroku", :name => "gittip"},
-      {:service => "heroku", :name => "gittip-dev"}
-    ]
-  end
-
   class User < ActiveYaml::Base
-    include ActiveHash::Associations
-    belongs_to :service
-
     set_filename "users"
   end
 end
 
 module Dashboard::Controllers
-  class Index
+  class Index < R '/'
     def get
+      @github = Excon.new("https://#{ENV['GITHUB_TOKEN']}:x-oauth-basic@api.github.com")
       @services = Service.all
+      @apps = []
+
+      @services.each do |service|
+        case service.name
+        when /heroku/i
+          service.apps.each do |app|
+            heroku = Heroku::API.new
+            collaborators = heroku.get_collaborators(app['name']).body.map {|collab| collab['email'] }
+            @apps << {name: app['name'], service: 'heroku', access: collaborators}
+          end
+        when /github/i
+        end
+      end
       render :index
     end
   end
@@ -53,7 +52,44 @@ module Dashboard::Views
   def index
     @services.each do |service|
       h2 service.name
-      p service.access.sort.join ', '
+      unless service.access.nil?
+        ul do
+          service.access.each do |collab|
+            li collab
+          end
+        end
+      end
+      unless service.apps.nil?
+        case service.name
+        when /heroku/i
+          service.apps.each do |app|
+            h4 app['name']
+            app.merge! @apps.select{|a| a[:name] == app['name']}.first
+            ul do
+              app[:access].each do |collab|
+                li collab
+              end
+            end
+          end
+        when /github/i
+          service.apps.each do |app|
+            h4 app['name']
+            ul do
+              response = @github.get(:path => "/repos/#{app['name']}/teams")
+              teams = JSON.parse response.body
+              teams.each do |team|
+                response = @github.get(:path => "/teams/#{team['id']}/members")
+                members = JSON.parse response.body
+                members.map{|m| m['login']}.each do |username|
+                  li username
+                end
+              end
+            end
+          end
+        else
+          nil
+        end
+      end
     end
   end
 end
