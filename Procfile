@@ -1,1 +1,1 @@
-web: bundle exec camping app.rb
+web: bundle exec camping app.rb --port $PORT
