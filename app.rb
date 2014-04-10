@@ -54,17 +54,24 @@ end
 module Dashboard::Views
   def layout
     html do
-      head { title "Gittip Service Access Dashboard" }
+      head do
+        title "Gittip Service Access Dashboard"
+        link :rel => "stylesheet",
+          :type => "text/css",
+          :href => "https://assets-gittipllc.netdna-ssl.com/12.3.3/gittip.css"
+      end
       body do
-        h1 "Gittip Service Access Dashboard"
-        self << yield
+        div.hero! do
+          h2.top { span "Gittip Service Access Dashboard" }
+        end
+        div.page! { self << yield }
       end
     end
   end
 
   def index
     @services.each do |service|
-      h2 service.name
+      h1 service.name
       unless service.access.nil?
         ul do
           service.access.each do |collab|
@@ -76,7 +83,7 @@ module Dashboard::Views
         case service.name
         when /heroku/i, /github/i
           service.apps.each do |app|
-            h4 app['name']
+            h2 app['name']
             ul do
               app[:access].each do |collab|
                 li collab
