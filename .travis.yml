@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 1.9.3
+script: true
+branches:
+  only:
+  - master
+deploy:
+  provider: heroku
+  api_key:
+    secure: cMi0f/CxPstvtsaLmug25jtRygFWK6gw+BseNv7oXghDSHMALkkO+JGW3lCUiaBZngmCFB36xW3lZsf/fo01kqted4kpUhMdoDdyuLL9krl0sXQbu9M18g2taSgtigHWJpYIKWKVxT2sDGUlD8qdJQPgXoxr/X5xYrslNXf4ltI=
+  app:
+    master: gittip-access-dashboard
+  on:
+    repo: gittip/access-dashboard
+    branch: master
