@@ -3,5 +3,5 @@ source "https://rubygems.org"
 
 gem "active_hash"
 gem "camping"
-gem "heroku-api"
+gem "excon"
 gem "markaby"

@@ -1,7 +1,6 @@
 require 'active_hash'
 require 'excon'
 require 'camping'
-require 'heroku-api'
 
 Camping.goes :Dashboard
 
@@ -18,6 +17,7 @@ end
 module Dashboard::Controllers
   class Index < R '/'
     def get
+      @heroku = Excon.new("https://:#{ENV['HEROKU_API_KEY']}@api.heroku.com")
       @github = Excon.new("https://#{ENV['GITHUB_TOKEN']}:x-oauth-basic@api.github.com")
       @services = Service.all
       @apps = []
@@ -26,8 +26,9 @@ module Dashboard::Controllers
         case service.name
         when /heroku/i
           service.apps.each do |app|
-            heroku = Heroku::API.new
-            collaborators = heroku.get_collaborators(app['name']).body.map {|collab| collab['email'] }
+            response = @heroku.get(:path => "/apps/#{app['name']}/collaborators").body
+            collaborators = JSON.parse response
+            collaborators.map! {|collab| collab['email'] }
             @apps << {name: app['name'], service: 'heroku', access: collaborators}
           end
         when /github/i
