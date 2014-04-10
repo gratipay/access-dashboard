@@ -8,8 +8,10 @@
 - name: GitHub
   apps:
   - name: gittip/www.gittip.com
+  - name: gittip/Gittip-Everywhere
   - name: gittip/building.gittip.com
   - name: gittip/roobot
+  - name: patcon/access-dashboard
 - name: Ally
   image:
   link:
