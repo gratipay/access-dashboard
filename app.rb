@@ -29,9 +29,21 @@ module Dashboard::Controllers
             response = @heroku.get(:path => "/apps/#{app['name']}/collaborators").body
             collaborators = JSON.parse response
             collaborators.map! {|collab| collab['email'] }
-            @apps << {name: app['name'], service: 'heroku', access: collaborators}
+            app.merge! access: collaborators
           end
         when /github/i
+          service.apps.each do |app|
+            app[:access] = []
+            response = @github.get(:path => "/repos/#{app['name']}/teams")
+            teams = JSON.parse response.body
+            teams.each do |team|
+              response = @github.get(:path => "/teams/#{team['id']}/members")
+              members = JSON.parse response.body
+              members.map{|m| m['login']}.each do |username|
+                app[:access] << username
+              end
+            end
+          end
         end
       end
       render :index
@@ -62,28 +74,12 @@ module Dashboard::Views
       end
       unless service.apps.nil?
         case service.name
-        when /heroku/i
+        when /heroku/i, /github/i
           service.apps.each do |app|
             h4 app['name']
-            app.merge! @apps.select{|a| a[:name] == app['name']}.first
             ul do
               app[:access].each do |collab|
                 li collab
-              end
-            end
-          end
-        when /github/i
-          service.apps.each do |app|
-            h4 app['name']
-            ul do
-              response = @github.get(:path => "/repos/#{app['name']}/teams")
-              teams = JSON.parse response.body
-              teams.each do |team|
-                response = @github.get(:path => "/teams/#{team['id']}/members")
-                members = JSON.parse response.body
-                members.map{|m| m['login']}.each do |username|
-                  li username
-                end
               end
             end
           end
