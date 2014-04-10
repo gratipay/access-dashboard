@@ -2,6 +2,7 @@
   apps:
   - name: gittip
   - name: gittip-dev
+  - name: gittip-access-dashboard
   - name: building-gittip-com
   - name: roobot-test
   - name: roobot-prod
