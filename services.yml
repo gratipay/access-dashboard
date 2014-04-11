@@ -8,7 +8,7 @@
   - name: roobot-prod
 - name: GitHub
   apps:
-  - name: gittip/access-dashboard
+  #- name: gittip/access-dashboard
   - name: gittip/building.gittip.com
   - name: gittip/Gittip-Everywhere
   - name: gittip/roobot

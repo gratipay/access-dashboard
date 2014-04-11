@@ -28,7 +28,7 @@ module Dashboard::Controllers
           service.apps.each do |app|
             response = @heroku.get(:path => "/apps/#{app['name']}/collaborators").body
             collaborators = JSON.parse response
-            collaborators.map! {|collab| collab['email'] }
+            collaborators.map! {|collab| User.find_by_email collab['email'] }
             app.merge! access: collaborators
           end
         when /github/i
@@ -39,8 +39,11 @@ module Dashboard::Controllers
             teams.each do |team|
               response = @github.get(:path => "/teams/#{team['id']}/members")
               members = JSON.parse response.body
-              members.map{|m| m['login']}.each do |username|
-                app[:access] << username
+              members.each do |m|
+                unless User.find_by_username(m['login'])
+                  User.create(:username => m['login'])
+                end
+                app[:access] << User.find_by_username(m['login'])
               end
             end
           end
@@ -86,7 +89,7 @@ module Dashboard::Views
             h2 app['name']
             ul do
               app[:access].each do |collab|
-                li collab
+                li collab.username
               end
             end
           end
