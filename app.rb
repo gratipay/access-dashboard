@@ -75,16 +75,10 @@ module Dashboard::Views
   def index
     @services.each do |service|
       h1 service.name
-      unless service.access.nil?
-        ul do
-          service.access.each do |collab|
-            li collab
-          end
-        end
-      end
-      unless service.apps.nil?
-        case service.name
-        when /heroku/i, /github/i
+      case service.name
+      when /heroku/i, /github/i
+        # Dynamic service config
+        if service.apps
           service.apps.each do |app|
             h2 app['name']
             ul do
@@ -93,8 +87,15 @@ module Dashboard::Views
               end
             end
           end
-        else
-          nil
+        end
+      else
+        # Manual service config
+        if service.access
+          ul do
+            service.access.each do |collab|
+              li collab
+            end
+          end
         end
       end
     end
