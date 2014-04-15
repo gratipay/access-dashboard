@@ -22,9 +22,10 @@
   image:
   link:
   access:
-  - whit537
-  - clone1018
   - bruceadams
+  - clone1018
+  - pjf
+  - whit537
 - name: Capital One
   image:
   link:
@@ -35,16 +36,24 @@
   link:
   access:
   - whit537
+  - rummik (root on gttp.co)
+  - seanlinsley (deploy on gttp.co)
 - name: Freshdesk
   image:
   link:
   access:
-  - whit537
+  - bruceadams (admin)
+  - clone1018 (daypass)
+  - patcon (admin)
+  - pjf (daypass)
+  - whit537 (admin)
 - name: Gittip.com
   image:
   link:
   access:
   - whit537
+  - bruceadams
+  - patcon
 - name: Gittip LLC
   image:
   link:
@@ -54,12 +63,12 @@
   image:
   link:
   access:
-  - whit537
-  - rummik
-  - clone1018
   - abnor
-  - seanlinsley
+  - clone1018
   - patcon
+  - rummik
+  - seanlinsley
+  - whit537
 - name: New Alliance
   image:
   link:
@@ -74,15 +83,25 @@
   image:
   link:
   access:
-  - whit537
-  - clone1018
   - bruceadams
-  - zwn
+  - clone1018
+  - patcon
+  - rummik
   - seanlinsley
+  - whit537
+  - zwn
+- name: SupportBee
+  image:
+  link:
+  access:
+  - bruceadams
+  - whit537
 - name: Tumblr
   image:
   link:
   access:
+  - equis
+  - heidigardner
   - whit537
 - name: Twitter
   image:
