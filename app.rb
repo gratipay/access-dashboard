@@ -19,16 +19,25 @@ module Dashboard::Controllers
     def get
       @heroku = Excon.new("https://:#{ENV['HEROKU_API_KEY']}@api.heroku.com")
       @github = Excon.new("https://#{ENV['GITHUB_TOKEN']}:x-oauth-basic@api.github.com")
+      @balanced = Excon.new("https://auth.balancedpayments.com", :headers => {"Cookie" => "session=#{ENV['BALANCED_COOKIE_SESSION_ID']}"})
       @services = Service.all
       @apps = []
 
       @services.each do |service|
         case service.name
+        when /balanced/i
+          session_user = JSON.parse @balanced.get(:path => "/users").body
+          collaborators = JSON.parse @balanced.get(:path => "/marketplaces/#{ENV['BALANCED_MARKETPLACE_ID']}/users").body
+
+          collaborators.concat session_user
+
+          collaborators.map! {|collab| User.find_by_email collab['email_address']}
+          service['access'] = collaborators
         when /heroku/i
           service.apps.each do |app|
             response = @heroku.get(:path => "/apps/#{app['name']}/collaborators").body
             collaborators = JSON.parse response
-            collaborators.map! {|collab| User.find_by_email collab['email'] }
+            collaborators.map! {|collab| User.find_by_email collab['email']}
             app.merge! access: collaborators
           end
         when /github/i
@@ -85,6 +94,14 @@ module Dashboard::Views
               app[:access].each do |collab|
                 li collab.username
               end
+            end
+          end
+        end
+      when /balanced/i
+        if service['access']
+          ul do
+            service['access'].each do |collab|
+              li collab.username if collab
             end
           end
         end

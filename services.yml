@@ -20,11 +20,6 @@
 - name: Balanced
   image:
   link:
-  access:
-  - bruceadams
-  - clone1018
-  - pjf
-  - whit537
 - name: Capital One
   image:
   link:
