@@ -8,8 +8,11 @@
 - name: GitHub
   apps:
   - name: gittip/access-dashboard
+  - name: gittip/aspen-python
   - name: gittip/building.gittip.com
   - name: gittip/Gittip-Everywhere
+  - name: gittip/gttp.co
+  - name: gittip/redesign-playground
   - name: gittip/roobot
   - name: gittip/www.gittip.com
 - name: Ally
