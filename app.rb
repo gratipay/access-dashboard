@@ -67,7 +67,7 @@ module Dashboard::Views
         title "Gittip Service Access Dashboard"
         link :rel => "stylesheet",
           :type => "text/css",
-          :href => "https://assets-gittipllc.netdna-ssl.com/12.3.3/gittip.css"
+          :href => "https://assets-gittipllc.netdna-ssl.com/-/gittip.css"
       end
       body do
         div.hero! do
