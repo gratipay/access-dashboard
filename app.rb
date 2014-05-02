@@ -29,6 +29,11 @@ module Dashboard::Controllers
           service.apps.each do |app|
             response = @heroku.get(:path => "/apps/#{app['name']}/collaborators").body
             collaborators = JSON.parse response
+            collaborators.each do |collab|
+              unless User.find_by_email(collab['email'])
+                User.create(:email => collab['email'])
+              end
+            end
             collaborators.map! {|collab| User.find_by_email collab['email']}
             app.merge! access: collaborators
           end
@@ -84,7 +89,11 @@ module Dashboard::Views
             h2 app['name']
             ul do
               app[:access].each do |collab|
-                li collab.username
+                if collab.username
+                  li collab.username
+                else
+                  li collab.email
+                end
               end
             end
           end
