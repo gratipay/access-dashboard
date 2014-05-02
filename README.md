@@ -22,3 +22,8 @@ gittip/www.gittip.com#2220)
   `read:org`
 * `BALANCED_COOKIE_SESSION_ID` was retrieved from the browser inspector
   tool.
+* `users.yml` is used to tie Heroku account emails to github usernames,
+  which we use throughout to show access. If there is a Heroku
+collaborator without an entry in `users.yml`, we opt to obfuscate that
+user in the access listing. Otherwise we would only be able to identify
+them by their Heroku email, which they might consider private.

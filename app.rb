@@ -31,7 +31,7 @@ module Dashboard::Controllers
             collaborators = JSON.parse response
             collaborators.each do |collab|
               unless User.find_by_email(collab['email'])
-                User.create(:email => collab['email'])
+                User.create(:email => collab['email'], :username => '*********')
               end
             end
             collaborators.map! {|collab| User.find_by_email collab['email']}
@@ -89,11 +89,7 @@ module Dashboard::Views
             h2 app['name']
             ul do
               app[:access].each do |collab|
-                if collab.username
-                  li collab.username
-                else
-                  li collab.email
-                end
+                li collab.username
               end
             end
           end
