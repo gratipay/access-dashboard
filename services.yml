@@ -1,20 +1,20 @@
 - name: Heroku
   apps:
-  - name: gittip
-  - name: gittip-access-dashboard
-  - name: building-gittip-com
+  - name: gratipay
+  - name: gratipay-access-dashboard
+  - name: inside-gratipay-com
   - name: roobot-test
   - name: roobot-prod
 - name: GitHub
   apps:
-  - name: gittip/access-dashboard
-  - name: gittip/aspen-python
-  - name: gittip/building.gittip.com
-  - name: gittip/Gittip-Everywhere
-  - name: gittip/gttp.co
-  - name: gittip/redesign-playground
-  - name: gittip/roobot
-  - name: gittip/www.gittip.com
+  - name: gratipay/access-dashboard
+  - name: gratipay/aspen-python
+  - name: gratipay/inside.gratipay.com
+  - name: gratipay/gratipay-Everywhere
+  - name: gratipay/gttp.co
+  - name: gratipay/redesign-playground
+  - name: gratipay/roobot
+  - name: gratipay/www.gratipay.com
 - name: Ally
   image:
   link:
@@ -52,7 +52,7 @@
   - pjf (daypass)
   - whit537 (admin)
   - seanlinsley (daypass)
-- name: Gittip.com
+- name: Gratipay.com
   image:
   link:
   access:
@@ -63,7 +63,7 @@
   - seanlinsley
   - whit537
   - zwn
-- name: Gittip LLC
+- name: Gratipay LLC
   image:
   link:
   access:
