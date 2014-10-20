@@ -14,7 +14,7 @@
   - name: gratipay/gttp.co
   - name: gratipay/redesign-playground
   - name: gratipay/roobot
-  - name: gratipay/www.gratipay.com
+  - name: gratipay/gratipay.com
 - name: Ally
   image:
   link:
