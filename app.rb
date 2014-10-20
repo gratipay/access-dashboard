@@ -17,8 +17,8 @@ end
 module Dashboard::Controllers
   class Index < R '/'
     def get
-      @heroku = Excon.new("https://:#{ENV['HEROKU_API_KEY']}@api.heroku.com")
-      @github = Excon.new("https://#{ENV['GITHUB_TOKEN']}:x-oauth-basic@api.github.com")
+      @heroku = Excon.new("https://:#{ENV['HEROKU_API_KEY']}@api.heroku.com", :persistent => true)
+      @github = Excon.new("https://#{ENV['GITHUB_TOKEN']}:x-oauth-basic@api.github.com", :persistent => true)
       @balanced = Excon.new("https://auth.balancedpayments.com", :headers => {"Cookie" => "session=#{ENV['BALANCED_COOKIE_SESSION_ID']}"})
       @services = Service.all
       @apps = []
@@ -27,8 +27,10 @@ module Dashboard::Controllers
         case service.name
         when /heroku/i
           service.apps.each do |app|
-            response = @heroku.get(:path => "/apps/#{app['name']}/collaborators").body
-            collaborators = JSON.parse response
+            app[:access] = []
+            response = @heroku.get(:path => "/apps/#{app['name']}/collaborators")
+            next if response.status!=200
+            collaborators = JSON.parse response.body
             collaborators.each do |collab|
               unless User.find_by_email(collab['email'])
                 User.create(:email => collab['email'], :username => '*********')
@@ -41,6 +43,7 @@ module Dashboard::Controllers
           service.apps.each do |app|
             app[:access] = []
             response = @github.get(:path => "/repos/#{app['name']}/teams")
+            next if response.status!=200
             teams = JSON.parse response.body
             teams.each do |team|
               response = @github.get(:path => "/teams/#{team['id']}/members")
@@ -88,8 +91,12 @@ module Dashboard::Views
           service.apps.each do |app|
             h2 app['name']
             ul do
-              app[:access].each do |collab|
-                li collab.username
+              if app[:access]==[]
+                li "Service inaccessible"
+              else
+                app[:access].each do |collab|
+                  li collab.username
+                end
               end
             end
           end
