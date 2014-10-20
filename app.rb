@@ -17,8 +17,8 @@ end
 module Dashboard::Controllers
   class Index < R '/'
     def get
-      @heroku = Excon.new("https://:#{ENV['HEROKU_API_KEY']}@api.heroku.com")
-      @github = Excon.new("https://#{ENV['GITHUB_TOKEN']}:x-oauth-basic@api.github.com")
+      @heroku = Excon.new("https://:#{ENV['HEROKU_API_KEY']}@api.heroku.com", :persistent => true)
+      @github = Excon.new("https://#{ENV['GITHUB_TOKEN']}:x-oauth-basic@api.github.com", :persistent => true)
       @balanced = Excon.new("https://auth.balancedpayments.com", :headers => {"Cookie" => "session=#{ENV['BALANCED_COOKIE_SESSION_ID']}"})
       @services = Service.all
       @apps = []
