@@ -1,10 +1,10 @@
-# Gittip Service Access Dashboard
+# Gratipay Service Access Dashboard
 
-[![Build Status](https://travis-ci.org/gittip/access-dashboard.svg?branch=master)](https://travis-ci.org/gittip/access-dashboard)
+[![Build Status](https://travis-ci.org/gratipay/access-dashboard.svg?branch=master)](https://travis-ci.org/gratipay/access-dashboard)
 
 A tiny app aspiring to be a dynamic means of communicating who has
 access to what in an Open Company. (Origin story:
-gittip/www.gittip.com#2220)
+gratipay/gratipay.com#2220)
 
 ## Usage
 
