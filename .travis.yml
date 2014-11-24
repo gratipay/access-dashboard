@@ -8,7 +8,7 @@ branches:
 deploy:
   provider: heroku
   api_key:
-    secure: cMi0f/CxPstvtsaLmug25jtRygFWK6gw+BseNv7oXghDSHMALkkO+JGW3lCUiaBZngmCFB36xW3lZsf/fo01kqted4kpUhMdoDdyuLL9krl0sXQbu9M18g2taSgtigHWJpYIKWKVxT2sDGUlD8qdJQPgXoxr/X5xYrslNXf4ltI=
+    secure: ShQ2DhljgjwvfxSpbBhHvIO3Br3y++8YbuTbjA+zRO6nRrGmgKukipvqsi8WibjpqBgDws1u4SpNp06Aef8NYTCYgISAh48ZkwvtUM+4wJXqw3ijNXr5oJoEE89rDM5jRp5Aft5BBmx2GA6TS1Fxav61RAC7/zKEsJTSrtYikS4=
   app:
     master: gratipay-access-dashboard
   on:
