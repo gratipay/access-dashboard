@@ -67,14 +67,14 @@ module Dashboard::Views
   def layout
     html do
       head do
-        title "Gittip Service Access Dashboard"
+        title "Gratipay Service Access Dashboard"
         link :rel => "stylesheet",
           :type => "text/css",
           :href => "https://assets-gittipllc.netdna-ssl.com/-/gittip.css"
       end
       body do
         div.hero! do
-          h2.top { span "Gittip Service Access Dashboard" }
+          h2.top { span "Gratipay Service Access Dashboard" }
         end
         div.page! { self << yield }
       end
