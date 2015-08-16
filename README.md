@@ -4,7 +4,7 @@
 
 A tiny app aspiring to be a dynamic means of communicating who has
 access to what in an Open Company. (Origin story:
-[gratipay/gratipay.com#2220](https://github.com/gratipay/gratipay.com#2220))
+[gratipay/gratipay.com#2220](https://github.com/gratipay/gratipay.com/issues/2220))
 
 ## Usage
 
